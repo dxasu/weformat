@@ -1,0 +1,13 @@
+{
+  "output_dir": "./weformat",
+  "vault_root": "/path/to/your/obsidian/vault",
+  "image_search_paths": [],
+  "settings": {
+    "default_theme": "github",
+    "auto_open_browser": true
+  },
+  "cover": {
+    "output_dir": "./covers",
+    "image_generation_script": ""
+  }
+}
