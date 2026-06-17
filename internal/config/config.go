@@ -1,4 +1,4 @@
-package main
+package config
 
 import (
 	"encoding/json"
@@ -21,15 +21,16 @@ type Config struct {
 	} `json:"cover"`
 }
 
-func LoadConfig(root string) (*Config, error) {
+func Load(root string) (*Config, error) {
 	configPath := filepath.Join(root, "config.json")
 	b, err := os.ReadFile(configPath)
 	if err != nil {
-		return nil, fmt.Errorf("读取配置失败 %s: %w", configPath, err)
+		fmt.Fprintf(os.Stderr, "错误: 读取配置 %s 失败, 使用默认配置 - %v\n", configPath, err)
+		return &Config{}, nil
 	}
 	var cfg Config
 	if err := json.Unmarshal(b, &cfg); err != nil {
-		return nil, fmt.Errorf("解析配置失败: %w", err)
+		return nil, fmt.Errorf("解析配置 %s 失败: %w", configPath, err)
 	}
 	return &cfg, nil
 }

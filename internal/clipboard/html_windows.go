@@ -1,6 +1,6 @@
 //go:build windows
 
-package main
+package clipboard
 
 import (
 	"fmt"
@@ -39,7 +39,7 @@ func winErr(action string, err error) error {
 	return fmt.Errorf("%s 失败: %w", action, err)
 }
 
-func openClipboardWithRetry() error {
+func openWithRetry() error {
 	var lastErr error
 	for i := 0; i < 10; i++ {
 		r, _, err := procOpenClipboard.Call(0)
@@ -52,7 +52,7 @@ func openClipboardWithRetry() error {
 	return winErr("打开剪贴板", lastErr)
 }
 
-func setClipboardBytes(format uintptr, data []byte) error {
+func setBytes(format uintptr, data []byte) error {
 	handle, _, err := procGlobalAlloc.Call(gmemMoveable, uintptr(len(data)))
 	if handle == 0 {
 		return winErr("分配剪贴板内存", err)
@@ -100,7 +100,7 @@ func plainTextFromHTML(content string) string {
 	return strings.TrimSpace(text)
 }
 
-func writeWindowsHTMLClipboard(content string) error {
+func writeWindowsHTML(content string) error {
 	formatName, err := syscall.UTF16PtrFromString("HTML Format")
 	if err != nil {
 		return err
@@ -110,7 +110,7 @@ func writeWindowsHTMLClipboard(content string) error {
 		return winErr("注册 HTML 剪贴板格式", err)
 	}
 
-	if err := openClipboardWithRetry(); err != nil {
+	if err := openWithRetry(); err != nil {
 		return err
 	}
 	defer procCloseClipboard.Call()
@@ -119,10 +119,10 @@ func writeWindowsHTMLClipboard(content string) error {
 		return winErr("清空剪贴板", err)
 	}
 
-	if err := setClipboardBytes(format, append([]byte(buildCFHTML(content)), 0)); err != nil {
+	if err := setBytes(format, append([]byte(buildCFHTML(content)), 0)); err != nil {
 		return err
 	}
-	if err := setClipboardBytes(cfUnicodeText, unicodeTextBytes(plainTextFromHTML(content))); err != nil {
+	if err := setBytes(cfUnicodeText, unicodeTextBytes(plainTextFromHTML(content))); err != nil {
 		return err
 	}
 

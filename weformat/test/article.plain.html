@@ -1,0 +1,1449 @@
+<h1 id="go-">Go 高星项目功能分类与选型指南</h1>
+<blockquote>
+<p>基于 <code>first200-categorized.md</code> 生成。Stars 已按 <code>K</code> 显示并四舍五入为整数；风格略带调侃，但选型建议尽量认真。</p>
+</blockquote>
+<h2 id="heading">快速目录</h2>
+<ol>
+<li>AI / 大模型（15 个）</li>
+<li>Web 框架与 HTTP 库（15 个）</li>
+<li>静态站点与前端构建（2 个）</li>
+<li>容器与 Kubernetes（24 个）</li>
+<li>网络代理、穿透与 VPN（15 个）</li>
+<li>监控、日志与可观测性（9 个）</li>
+<li>数据库与存储（15 个）</li>
+<li>微服务、消息队列与 RPC（7 个）</li>
+<li>DevOps、CI/CD 与开发工具（16 个）</li>
+<li>CLI、终端与 TUI（18 个）</li>
+<li>安全、认证与加密（11 个）</li>
+<li>文件同步、网盘与备份（9 个）</li>
+<li>自托管应用与平台（12 个）</li>
+<li>爬虫、媒体与下载（6 个）</li>
+<li>通用工具库（5 个）</li>
+<li>Go 语言与学习资源（10 个）</li>
+<li>其他（9 个）</li>
+</ol>
+<hr>
+<h2 id="ai--">AI / 大模型</h2>
+<p>本地推理、模型网关、AI Agent、向量检索等，覆盖 LLM 部署与集成场景。</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">Stars</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ollama/ollama</td>
+<td style="text-align:right">174K</td>
+<td>本地运行各类大语言模型</td>
+</tr>
+<tr>
+<td>mudler/LocalAI</td>
+<td style="text-align:right">47K</td>
+<td>开源本地 AI 引擎，支持 LLM/视觉/语音等</td>
+</tr>
+<tr>
+<td>danielmiessler/Fabric</td>
+<td style="text-align:right">42K</td>
+<td>模块化 AI 提示框架，增强人类工作流</td>
+</tr>
+<tr>
+<td>milvus-io/milvus</td>
+<td style="text-align:right">45K</td>
+<td>云原生向量数据库，用于相似度检索</td>
+</tr>
+<tr>
+<td>QuantumNous/new-api</td>
+<td style="text-align:right">39K</td>
+<td>统一 AI 模型聚合与分发网关</td>
+</tr>
+<tr>
+<td>router-for-me/CLIProxyAPI</td>
+<td style="text-align:right">37K</td>
+<td>将多种 AI CLI 包装为兼容 API</td>
+</tr>
+<tr>
+<td>multica-ai/multica</td>
+<td style="text-align:right">36K</td>
+<td>开源托管 Agent 平台</td>
+</tr>
+<tr>
+<td>github/github-mcp-server</td>
+<td style="text-align:right">31K</td>
+<td>GitHub 官方 MCP 服务器</td>
+</tr>
+<tr>
+<td>gastownhall/beads</td>
+<td style="text-align:right">24K</td>
+<td>编码 Agent 的「记忆」增强</td>
+</tr>
+<tr>
+<td>charmbracelet/crush</td>
+<td style="text-align:right">25K</td>
+<td>终端 AI 编码助手</td>
+</tr>
+<tr>
+<td>sipeed/picoclaw</td>
+<td style="text-align:right">29K</td>
+<td>轻量可部署的自动化 Agent</td>
+</tr>
+<tr>
+<td>Wei-Shaw/sub2api</td>
+<td style="text-align:right">27K</td>
+<td>多 AI 订阅统一中继平台</td>
+</tr>
+<tr>
+<td>esengine/DeepSeek-Reasonix</td>
+<td style="text-align:right">22K</td>
+<td>终端 DeepSeek 原生 AI 编码 Agent</td>
+</tr>
+<tr>
+<td>vxcontrol/pentagi</td>
+<td style="text-align:right">18K</td>
+<td>自主 AI 渗透测试 Agent 系统</td>
+</tr>
+<tr>
+<td>photoprism/photoprism</td>
+<td style="text-align:right">40K</td>
+<td>AI 驱动的自托管照片管理</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading-1">对比介绍</h3>
+<p>这一类像一桌 AI 火锅：ollama 负责把模型端上桌，LocalAI 负责把各种菜都做成 OpenAI 兼容口味，Milvus 像专门记人脸和记忆点的仓库，Fabric、Crush、Reasonix 则偏向把模型变成可用的工作助手。</p>
+<p>如果你只是想本地跑模型，别一上来就搭一个豪华厨房；ollama 足够像电饭煲一样简单。若要给团队提供统一接口，new-api、CLIProxyAPI 更像前台收银，把不同模型供应商藏在后厨。</p>
+<h3 id="heading-2">不同场景下的最优选择</h3>
+<ul>
+<li>本地个人玩模型：优先 ollama，少折腾，启动快。</li>
+<li>需要 OpenAI 兼容 API：优先 LocalAI 或 new-api。</li>
+<li>做 RAG / 语义搜索：Milvus 是正经仓库管理员。</li>
+<li>想让 AI 参与编码：Crush、DeepSeek-Reasonix、beads 更贴近开发工作流。</li>
+<li>做 AI 安全或红队自动化：pentagi 更像拿着放大镜的机器人侦探。</li>
+</ul>
+<hr>
+<h2 id="web--http-">Web 框架与 HTTP 库</h2>
+<p>构建 REST API、Web 服务与实时通信的基础框架与路由库。</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">Stars</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gin-gonic/gin</td>
+<td style="text-align:right">89K</td>
+<td>高性能 HTTP Web 框架</td>
+</tr>
+<tr>
+<td>gofiber/fiber</td>
+<td style="text-align:right">40K</td>
+<td>Express 风格的 Go Web 框架</td>
+</tr>
+<tr>
+<td>labstack/echo</td>
+<td style="text-align:right">32K</td>
+<td>高性能简约 Web 框架</td>
+</tr>
+<tr>
+<td>beego/beego</td>
+<td style="text-align:right">32K</td>
+<td>全功能 Web 框架</td>
+</tr>
+<tr>
+<td>kataras/iris</td>
+<td style="text-align:right">26K</td>
+<td>HTTP/2 Web 框架</td>
+</tr>
+<tr>
+<td>zeromicro/go-zero</td>
+<td style="text-align:right">33K</td>
+<td>云原生微服务框架（含 CLI）</td>
+</tr>
+<tr>
+<td>go-kratos/kratos</td>
+<td style="text-align:right">26K</td>
+<td>哔哩哔哩开源微服务框架</td>
+</tr>
+<tr>
+<td>go-kit/kit</td>
+<td style="text-align:right">27K</td>
+<td>微服务标准库</td>
+</tr>
+<tr>
+<td>micro/go-micro</td>
+<td style="text-align:right">23K</td>
+<td>服务与 RPC 框架</td>
+</tr>
+<tr>
+<td>gofr-dev/gofr</td>
+<td style="text-align:right">21K</td>
+<td>内置可观测性的微服务框架</td>
+</tr>
+<tr>
+<td>valyala/fasthttp</td>
+<td style="text-align:right">23K</td>
+<td>高性能 HTTP 库</td>
+</tr>
+<tr>
+<td>go-chi/chi</td>
+<td style="text-align:right">22K</td>
+<td>轻量可组合 HTTP 路由</td>
+</tr>
+<tr>
+<td>gorilla/mux</td>
+<td style="text-align:right">22K</td>
+<td>强大 HTTP 路由与 URL 匹配</td>
+</tr>
+<tr>
+<td>gorilla/websocket</td>
+<td style="text-align:right">25K</td>
+<td>广泛使用的 WebSocket 实现</td>
+</tr>
+<tr>
+<td>flipped-aurora/gin-vue-admin</td>
+<td style="text-align:right">25K</td>
+<td>Gin + Vue 企业级后台开发平台</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading-3">对比介绍</h3>
+<p>Web 框架这桌很像选交通工具：Gin 是可靠小钢炮，Echo 简洁利落，Fiber 像从 Node/Express 搬家的同学专车，Beego/Iris 功能更全但行李也更多。</p>
+<p>微服务框架里 go-zero、Kratos、Go kit 更像套餐饭，配好了日志、RPC、配置、治理；chi、mux、fasthttp 更像单件工具，轻便但需要自己搭配。</p>
+<h3 id="heading-4">不同场景下的最优选择</h3>
+<ul>
+<li>普通 API 服务：Gin 通常最稳，资料多，团队沟通成本低。</li>
+<li>喜欢 Express 风格：Fiber 上手最快。</li>
+<li>轻量路由：chi 比较优雅，适合不想把厨房装修成商场的人。</li>
+<li>企业微服务：go-zero 或 Kratos 更省集成时间。</li>
+<li>极限 HTTP 性能：fasthttp 可以上，但别忘了它和标准库生态不是完全一条街。</li>
+</ul>
+<hr>
+<h2 id="heading-5">静态站点与前端构建</h2>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">Stars</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gohugoio/hugo</td>
+<td style="text-align:right">89K</td>
+<td>极速静态网站生成器</td>
+</tr>
+<tr>
+<td>evanw/esbuild</td>
+<td style="text-align:right">40K</td>
+<td>极快的 JS/CSS 打包与压缩工具</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading-6">对比介绍</h3>
+<p>Hugo 和 esbuild 都追求一个字：快。Hugo 负责把内容变成网站，esbuild 负责把前端资源打包到飞起。</p>
+<p>Hugo 像高铁写博客，适合文档站、博客和官网；esbuild 像前端流水线的涡轮增压器，适合 JS/CSS 构建。</p>
+<h3 id="heading-7">不同场景下的最优选择</h3>
+<ul>
+<li>搭博客/文档站：选 Hugo。</li>
+<li>前端构建和压缩：选 esbuild。</li>
+<li>想少配点东西：Hugo 更像开箱即用的电动车。</li>
+</ul>
+<hr>
+<h2 id="-kubernetes">容器与 Kubernetes</h2>
+<p>容器运行时、编排、镜像管理与 K8s 生态工具。</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">Stars</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kubernetes/kubernetes</td>
+<td style="text-align:right">123K</td>
+<td>生产级容器编排平台</td>
+</tr>
+<tr>
+<td>moby/moby</td>
+<td style="text-align:right">72K</td>
+<td>Docker 底层容器生态项目</td>
+</tr>
+<tr>
+<td>docker/compose</td>
+<td style="text-align:right">38K</td>
+<td>多容器应用定义与运行</td>
+</tr>
+<tr>
+<td>k3s-io/k3s</td>
+<td style="text-align:right">33K</td>
+<td>轻量级 Kubernetes</td>
+</tr>
+<tr>
+<td>kubernetes/minikube</td>
+<td style="text-align:right">32K</td>
+<td>本地运行 Kubernetes</td>
+</tr>
+<tr>
+<td>derailed/k9s</td>
+<td style="text-align:right">34K</td>
+<td>Kubernetes 终端管理 UI</td>
+</tr>
+<tr>
+<td>helm/helm</td>
+<td style="text-align:right">30K</td>
+<td>Kubernetes 包管理器</td>
+</tr>
+<tr>
+<td>istio/istio</td>
+<td style="text-align:right">38K</td>
+<td>服务网格：连接、安全、流量治理</td>
+</tr>
+<tr>
+<td>rancher/rancher</td>
+<td style="text-align:right">26K</td>
+<td>完整容器管理平台</td>
+</tr>
+<tr>
+<td>goharbor/harbor</td>
+<td style="text-align:right">29K</td>
+<td>云原生镜像仓库</td>
+</tr>
+<tr>
+<td>wagoodman/dive</td>
+<td style="text-align:right">54K</td>
+<td>探索 Docker 镜像各层</td>
+</tr>
+<tr>
+<td>jesseduffield/lazydocker</td>
+<td style="text-align:right">51K</td>
+<td>Docker 终端 TUI 管理</td>
+</tr>
+<tr>
+<td>containrrr/watchtower</td>
+<td style="text-align:right">25K</td>
+<td>自动更新容器镜像</td>
+</tr>
+<tr>
+<td>podman-container-tools/podman</td>
+<td style="text-align:right">32K</td>
+<td>无守护进程容器管理</td>
+</tr>
+<tr>
+<td>abiosoft/colima</td>
+<td style="text-align:right">29K</td>
+<td>macOS/Linux 轻量容器运行时</td>
+</tr>
+<tr>
+<td>lima-vm/lima</td>
+<td style="text-align:right">21K</td>
+<td>专注容器的 Linux 虚拟机</td>
+</tr>
+<tr>
+<td>slimtoolkit/slim</td>
+<td style="text-align:right">23K</td>
+<td>精简容器镜像（最高约 30 倍）</td>
+</tr>
+<tr>
+<td>containerd/containerd</td>
+<td style="text-align:right">21K</td>
+<td>工业级容器运行时</td>
+</tr>
+<tr>
+<td>google/gvisor</td>
+<td style="text-align:right">19K</td>
+<td>容器应用内核（沙箱隔离）</td>
+</tr>
+<tr>
+<td>google/cadvisor</td>
+<td style="text-align:right">19K</td>
+<td>容器资源与性能分析</td>
+</tr>
+<tr>
+<td>bcicen/ctop</td>
+<td style="text-align:right">18K</td>
+<td>容器指标 top 界面</td>
+</tr>
+<tr>
+<td>argoproj/argo-cd</td>
+<td style="text-align:right">23K</td>
+<td>K8s 声明式持续部署</td>
+</tr>
+<tr>
+<td>kubernetes/ingress-nginx</td>
+<td style="text-align:right">19K</td>
+<td>K8s Ingress NGINX 控制器</td>
+</tr>
+<tr>
+<td>GoogleCloudPlatform/microservices-demo</td>
+<td style="text-align:right">20K</td>
+<td>微服务 + K8s + Istio 示例应用</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading-8">对比介绍</h3>
+<p>这一类是云原生动物园：Kubernetes 是园长，k3s 是轻量分园，minikube 是本地沙盘，Helm 是应用打包快递员，Istio 是交通警察。</p>
+<p>Docker/Moby/containerd/Podman 负责容器本身，Rancher、k9s、lazydocker 负责让人类不至于在命令行迷路，Harbor 管镜像仓库，Argo CD 管部署节奏。</p>
+<h3 id="heading-9">不同场景下的最优选择</h3>
+<ul>
+<li>生产级集群：Kubernetes 是标准答案。</li>
+<li>边缘/小机器/实验环境：k3s 很香。</li>
+<li>本地学习 K8s：minikube 或 k3s，别一开始就搬整座云。</li>
+<li>管理集群：k9s 适合终端党，Rancher 适合平台化管理。</li>
+<li>GitOps 部署：Argo CD 是常见优选。</li>
+<li>镜像分析瘦身：dive 看层，slim 减肥，像给镜像办健身卡。</li>
+</ul>
+<hr>
+<h2 id="-vpn">网络代理、穿透与 VPN</h2>
+<p>反向代理、内网穿透、组网与流量转发。</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">Stars</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fatedier/frp</td>
+<td style="text-align:right">107K</td>
+<td>内网穿透反向代理</td>
+</tr>
+<tr>
+<td>traefik/traefik</td>
+<td style="text-align:right">64K</td>
+<td>云原生应用反向代理</td>
+</tr>
+<tr>
+<td>caddyserver/caddy</td>
+<td style="text-align:right">73K</td>
+<td>自动 HTTPS 的 Web 服务器</td>
+</tr>
+<tr>
+<td>inconshreveable/ngrok</td>
+<td style="text-align:right">24K</td>
+<td>将本地服务暴露到公网</td>
+</tr>
+<tr>
+<td>v2ray/v2ray-core</td>
+<td style="text-align:right">47K</td>
+<td>代理平台（绕过网络限制）</td>
+</tr>
+<tr>
+<td>v2fly/v2ray-core</td>
+<td style="text-align:right">34K</td>
+<td>v2ray 社区维护分支</td>
+</tr>
+<tr>
+<td>XTLS/Xray-core</td>
+<td style="text-align:right">40K</td>
+<td>高性能代理核心</td>
+</tr>
+<tr>
+<td>SagerNet/sing-box</td>
+<td style="text-align:right">35K</td>
+<td>通用代理平台</td>
+</tr>
+<tr>
+<td>apernet/hysteria</td>
+<td style="text-align:right">22K</td>
+<td>高速抗审查代理</td>
+</tr>
+<tr>
+<td>ginuerzh/gost</td>
+<td style="text-align:right">18K</td>
+<td>Go 语言实现的隧道工具</td>
+</tr>
+<tr>
+<td>ehang-io/nps</td>
+<td style="text-align:right">34K</td>
+<td>内网穿透代理服务器</td>
+</tr>
+<tr>
+<td>juanfont/headscale</td>
+<td style="text-align:right">40K</td>
+<td>Tailscale 控制面自托管实现</td>
+</tr>
+<tr>
+<td>tailscale/tailscale</td>
+<td style="text-align:right">32K</td>
+<td>基于 WireGuard 的组网 VPN</td>
+</tr>
+<tr>
+<td>netbirdio/netbird</td>
+<td style="text-align:right">26K</td>
+<td>WireGuard 覆盖网络，支持 SSO/MFA</td>
+</tr>
+<tr>
+<td>XIU2/CloudflareSpeedTest</td>
+<td style="text-align:right">27K</td>
+<td>Cloudflare CDN 优选 IP 测速</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading-10">对比介绍</h3>
+<p>这一类都是网络世界的开门师傅：frp/nps/ngrok 帮你把内网服务搬到公网门口，Traefik/Caddy 管入口流量，Tailscale/headscale/NetBird 则把多台机器拉进同一个安全小区。</p>
+<p>v2ray/Xray/sing-box/hysteria 更偏通用代理与复杂网络场景，功能强但配置像乐高，拼得好是城堡，拼不好是脚底板灾难。</p>
+<h3 id="heading-11">不同场景下的最优选择</h3>
+<ul>
+<li>内网穿透：frp 优先，生态成熟。</li>
+<li>自动 HTTPS Web 入口：Caddy 很省心。</li>
+<li>K8s / 云原生入口：Traefik 更自然。</li>
+<li>私有组网：Tailscale 简单，headscale 适合自托管控制面。</li>
+<li>复杂代理：sing-box 或 Xray-core，配置前建议先泡杯茶。</li>
+</ul>
+<hr>
+<h2 id="heading-12">监控、日志与可观测性</h2>
+<p>指标采集、日志聚合、链路追踪与性能压测。</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">Stars</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>prometheus/prometheus</td>
+<td style="text-align:right">64K</td>
+<td>监控与时间序列数据库</td>
+</tr>
+<tr>
+<td>grafana/loki</td>
+<td style="text-align:right">28K</td>
+<td>日志聚合（类 Prometheus 思路）</td>
+</tr>
+<tr>
+<td>jaegertracing/jaeger</td>
+<td style="text-align:right">23K</td>
+<td>分布式链路追踪</td>
+</tr>
+<tr>
+<td>grafana/k6</td>
+<td style="text-align:right">31K</td>
+<td>现代负载测试工具</td>
+</tr>
+<tr>
+<td>tsenart/vegeta</td>
+<td style="text-align:right">25K</td>
+<td>HTTP 负载测试</td>
+</tr>
+<tr>
+<td>rakyll/hey</td>
+<td style="text-align:right">20K</td>
+<td>HTTP 压测工具（ab 替代）</td>
+</tr>
+<tr>
+<td>influxdata/telegraf</td>
+<td style="text-align:right">18K</td>
+<td>指标/日志采集代理</td>
+</tr>
+<tr>
+<td>henrygd/beszel</td>
+<td style="text-align:right">23K</td>
+<td>轻量服务器监控与告警</td>
+</tr>
+<tr>
+<td>cilium/cilium</td>
+<td style="text-align:right">24K</td>
+<td>基于 eBPF 的网络与安全可观测</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading-13">对比介绍</h3>
+<p>可观测性三件套：Prometheus 看指标，Loki 看日志，Jaeger 看链路。它们就像医生的体温计、病历本和 CT 片，缺哪个都容易靠玄学排障。</p>
+<p>k6、vegeta、hey 是压力测试三兄弟：k6 更现代，vegeta 像严肃的压测武士，hey 则轻巧到像兜里揣的秒表。</p>
+<h3 id="heading-14">不同场景下的最优选择</h3>
+<ul>
+<li>指标监控：Prometheus。</li>
+<li>日志聚合：Loki。</li>
+<li>链路追踪：Jaeger。</li>
+<li>接口压测：简单用 hey，脚本化复杂场景用 k6。</li>
+<li>轻量服务器监控：Beszel 省事。</li>
+</ul>
+<hr>
+<h2 id="heading-15">数据库与存储</h2>
+<p>关系型、分布式、向量、图数据库及 ORM/迁移工具。</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">Stars</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pingcap/tidb</td>
+<td style="text-align:right">40K</td>
+<td>分布式 NewSQL，兼容 MySQL</td>
+</tr>
+<tr>
+<td>cockroachdb/cockroach</td>
+<td style="text-align:right">32K</td>
+<td>云原生分布式 SQL 数据库</td>
+</tr>
+<tr>
+<td>dolthub/dolt</td>
+<td style="text-align:right">23K</td>
+<td>带 Git 版本控制的数据库</td>
+</tr>
+<tr>
+<td>vitessio/vitess</td>
+<td style="text-align:right">21K</td>
+<td>MySQL 水平扩展集群</td>
+</tr>
+<tr>
+<td>dgraph-io/dgraph</td>
+<td style="text-align:right">22K</td>
+<td>高性能图数据库</td>
+</tr>
+<tr>
+<td>rqlite/rqlite</td>
+<td style="text-align:right">18K</td>
+<td>基于 SQLite 的分布式数据库</td>
+</tr>
+<tr>
+<td>etcd-io/etcd</td>
+<td style="text-align:right">52K</td>
+<td>分布式键值存储（配置/协调）</td>
+</tr>
+<tr>
+<td>minio/minio</td>
+<td style="text-align:right">61K</td>
+<td>S3 兼容对象存储</td>
+</tr>
+<tr>
+<td>seaweedfs/seaweedfs</td>
+<td style="text-align:right">33K</td>
+<td>分布式对象/文件存储</td>
+</tr>
+<tr>
+<td>zincsearch/zincsearch</td>
+<td style="text-align:right">18K</td>
+<td>轻量 Elasticsearch 替代</td>
+</tr>
+<tr>
+<td>go-gorm/gorm</td>
+<td style="text-align:right">40K</td>
+<td>Go ORM 库</td>
+</tr>
+<tr>
+<td>jmoiron/sqlx</td>
+<td style="text-align:right">18K</td>
+<td>database/sql 扩展</td>
+</tr>
+<tr>
+<td>sqlc-dev/sqlc</td>
+<td style="text-align:right">18K</td>
+<td>从 SQL 生成类型安全 Go 代码</td>
+</tr>
+<tr>
+<td>golang-migrate/migrate</td>
+<td style="text-align:right">19K</td>
+<td>数据库迁移工具</td>
+</tr>
+<tr>
+<td>redis/go-redis</td>
+<td style="text-align:right">22K</td>
+<td>Redis Go 客户端</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading-16">对比介绍</h3>
+<p>数据库这类像仓库选址：TiDB/CockroachDB 管大规模分布式交易，MinIO/SeaweedFS 管对象和文件，etcd 管关键配置，Milvus 这类向量库则是给 AI 找相似记忆的。</p>
+<p>ORM 和 SQL 工具是开发者的筷子：GORM 好用但有抽象成本，sqlx 更贴近 SQL，sqlc 则把 SQL 变成类型安全代码，像给查询语句穿上防弹衣。</p>
+<h3 id="heading-17">不同场景下的最优选择</h3>
+<ul>
+<li>MySQL 兼容分布式数据库：TiDB。</li>
+<li>强一致分布式 SQL：CockroachDB。</li>
+<li>对象存储：MinIO。</li>
+<li>K8s 配置协调：etcd。</li>
+<li>图数据：Dgraph。</li>
+<li>喜欢 ORM：GORM；喜欢 SQL 可控：sqlc 或 sqlx。</li>
+</ul>
+<hr>
+<h2 id="-rpc">微服务、消息队列与 RPC</h2>
+<p>服务通信、服务发现、工作流与事件驱动架构。</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">Stars</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>grpc/grpc-go</td>
+<td style="text-align:right">23K</td>
+<td>gRPC Go 实现</td>
+</tr>
+<tr>
+<td>grpc-ecosystem/grpc-gateway</td>
+<td style="text-align:right">20K</td>
+<td>gRPC 转 REST/JSON 网关</td>
+</tr>
+<tr>
+<td>dapr/dapr</td>
+<td style="text-align:right">26K</td>
+<td>分布式应用运行时</td>
+</tr>
+<tr>
+<td>temporalio/temporal</td>
+<td style="text-align:right">21K</td>
+<td>持久化工作流引擎</td>
+</tr>
+<tr>
+<td>nsqio/nsq</td>
+<td style="text-align:right">26K</td>
+<td>实时分布式消息平台</td>
+</tr>
+<tr>
+<td>nats-io/nats-server</td>
+<td style="text-align:right">20K</td>
+<td>高性能消息系统</td>
+</tr>
+<tr>
+<td>hashicorp/consul</td>
+<td style="text-align:right">30K</td>
+<td>服务发现与配置</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading-18">对比介绍</h3>
+<p>这类项目负责让服务之间别靠吼。gRPC 是高速公路，grpc-gateway 是收费站翻译官，NATS/NSQ 是消息快递，Temporal 像不怕断电的流程管家。</p>
+<p>Dapr 尝试把服务调用、状态、发布订阅等能力做成积木；Consul 则偏服务发现和配置治理。</p>
+<h3 id="heading-19">不同场景下的最优选择</h3>
+<ul>
+<li>高性能 RPC：grpc-go。</li>
+<li>需要 REST 兼容：grpc-gateway。</li>
+<li>轻量消息：NATS。</li>
+<li>实时分布式消息：NSQ。</li>
+<li>长流程/重试/补偿：Temporal。</li>
+<li>多运行时能力抽象：Dapr。</li>
+</ul>
+<hr>
+<h2 id="devopscicd-">DevOps、CI/CD 与开发工具</h2>
+<p>本地 CI、调试、热重载、代码检查与密钥扫描。</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">Stars</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nektos/act</td>
+<td style="text-align:right">71K</td>
+<td>本地运行 GitHub Actions</td>
+</tr>
+<tr>
+<td>harness/harness</td>
+<td style="text-align:right">37K</td>
+<td>开源端到端 DevOps 平台</td>
+</tr>
+<tr>
+<td>cli/cli</td>
+<td style="text-align:right">45K</td>
+<td>GitHub 官方 CLI</td>
+</tr>
+<tr>
+<td>mislav/hub</td>
+<td style="text-align:right">23K</td>
+<td>增强 git 与 GitHub 协作</td>
+</tr>
+<tr>
+<td>go-delve/delve</td>
+<td style="text-align:right">25K</td>
+<td>Go 调试器</td>
+</tr>
+<tr>
+<td>air-verse/air</td>
+<td style="text-align:right">24K</td>
+<td>Go 应用热重载</td>
+</tr>
+<tr>
+<td>golangci/golangci-lint</td>
+<td style="text-align:right">19K</td>
+<td>Go 静态检查聚合运行器</td>
+</tr>
+<tr>
+<td>gitleaks/gitleaks</td>
+<td style="text-align:right">28K</td>
+<td>Git 仓库密钥泄露扫描</td>
+</tr>
+<tr>
+<td>trufflesecurity/trufflehog</td>
+<td style="text-align:right">27K</td>
+<td>凭据泄露检测与验证</td>
+</tr>
+<tr>
+<td>aquasecurity/trivy</td>
+<td style="text-align:right">36K</td>
+<td>容器/代码/IaC 漏洞扫描</td>
+</tr>
+<tr>
+<td>twpayne/chezmoi</td>
+<td style="text-align:right">20K</td>
+<td>跨机器 dotfiles 管理</td>
+</tr>
+<tr>
+<td>asdf-vm/asdf</td>
+<td style="text-align:right">25K</td>
+<td>多语言版本管理器</td>
+</tr>
+<tr>
+<td>coreybutler/nvm-windows</td>
+<td style="text-align:right">47K</td>
+<td>Windows 版 Node 版本管理（Go 编写）</td>
+</tr>
+<tr>
+<td>ahmetb/kubectx</td>
+<td style="text-align:right">20K</td>
+<td>快速切换 K8s 集群/命名空间</td>
+</tr>
+<tr>
+<td>probelabs/goreplay</td>
+<td style="text-align:right">19K</td>
+<td>录制并重放 HTTP 流量做测试</td>
+</tr>
+<tr>
+<td>keploy/keploy</td>
+<td style="text-align:right">18K</td>
+<td>API/E2E 测试沙箱平台</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading-20">对比介绍</h3>
+<p>这类是开发团队的工具箱：act 让 GitHub Actions 在本地彩排，Delve 管调试，Air 管热重载，golangci-lint 管代码体检，Trivy/Gitleaks/TruffleHog 管安全体检。</p>
+<p>Harness 偏平台化，chezmoi/asdf 管环境和配置。一个团队要是没有这些工具，就像厨师没有刀，只能靠眼神切菜。</p>
+<h3 id="heading-21">不同场景下的最优选择</h3>
+<ul>
+<li>本地跑 CI：act。</li>
+<li>Go 调试：Delve。</li>
+<li>开发热重载：Air。</li>
+<li>代码质量：golangci-lint。</li>
+<li>漏洞扫描：Trivy。</li>
+<li>密钥泄露扫描：Gitleaks 或 TruffleHog。</li>
+<li>环境版本管理：asdf；dotfiles 管理：chezmoi。</li>
+</ul>
+<hr>
+<h2 id="cli-tui">CLI、终端与 TUI</h2>
+<p>命令行框架、终端 UI、模糊搜索与 Shell 增强。</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">Stars</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>junegunn/fzf</td>
+<td style="text-align:right">81K</td>
+<td>命令行模糊查找器</td>
+</tr>
+<tr>
+<td>jesseduffield/lazygit</td>
+<td style="text-align:right">79K</td>
+<td>Git 终端 UI</td>
+</tr>
+<tr>
+<td>spf13/cobra</td>
+<td style="text-align:right">44K</td>
+<td>CLI 应用框架</td>
+</tr>
+<tr>
+<td>spf13/viper</td>
+<td style="text-align:right">30K</td>
+<td>配置管理库</td>
+</tr>
+<tr>
+<td>urfave/cli</td>
+<td style="text-align:right">24K</td>
+<td>声明式 CLI 构建库</td>
+</tr>
+<tr>
+<td>charmbracelet/bubbletea</td>
+<td style="text-align:right">43K</td>
+<td>TUI 框架</td>
+</tr>
+<tr>
+<td>charmbracelet/glow</td>
+<td style="text-align:right">26K</td>
+<td>终端 Markdown 渲染</td>
+</tr>
+<tr>
+<td>charmbracelet/gum</td>
+<td style="text-align:right">24K</td>
+<td>Shell 脚本美化工具</td>
+</tr>
+<tr>
+<td>charmbracelet/vhs</td>
+<td style="text-align:right">20K</td>
+<td>CLI 操作录制成 GIF/视频</td>
+</tr>
+<tr>
+<td>micro-editor/micro</td>
+<td style="text-align:right">29K</td>
+<td>终端文本编辑器</td>
+</tr>
+<tr>
+<td>JanDeDobbeleer/oh-my-posh</td>
+<td style="text-align:right">23K</td>
+<td>跨平台 Shell 提示符主题</td>
+</tr>
+<tr>
+<td>antonmedv/fx</td>
+<td style="text-align:right">21K</td>
+<td>终端 JSON 查看器</td>
+</tr>
+<tr>
+<td>chubin/wttr.in</td>
+<td style="text-align:right">30K</td>
+<td>终端天气查询</td>
+</tr>
+<tr>
+<td>Wox-launcher/Wox</td>
+<td style="text-align:right">27K</td>
+<td>跨平台启动器</td>
+</tr>
+<tr>
+<td>wavetermdev/waveterm</td>
+<td style="text-align:right">21K</td>
+<td>集成 AI 的跨平台终端</td>
+</tr>
+<tr>
+<td>yudai/gotty</td>
+<td style="text-align:right">19K</td>
+<td>将终端共享为 Web 应用</td>
+</tr>
+<tr>
+<td>terrastruct/d2</td>
+<td style="text-align:right">24K</td>
+<td>文本转图表的脚本语言</td>
+</tr>
+<tr>
+<td>matryer/xbar</td>
+<td style="text-align:right">18K</td>
+<td>macOS 菜单栏脚本输出</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading-22">对比介绍</h3>
+<p>终端工具区就是命令行玩家的装备店：fzf 是搜索神器，lazygit 是 Git 的游戏手柄，cobra/urfave-cli 是写 CLI 的脚手架，Bubble Tea 是做 TUI 的积木。</p>
+<p>Glow、Gum、VHS、oh-my-posh 负责让终端不再像上世纪机房。好看不是原罪，尤其当你每天盯它八小时。</p>
+<h3 id="heading-23">不同场景下的最优选择</h3>
+<ul>
+<li>快速找文件/历史命令：fzf。</li>
+<li>Git 终端操作：lazygit。</li>
+<li>写复杂 CLI：Cobra。</li>
+<li>写简单 CLI：urfave/cli。</li>
+<li>做漂亮 TUI：Bubble Tea。</li>
+<li>美化 shell 脚本交互：Gum。</li>
+<li>终端 Markdown：Glow。</li>
+</ul>
+<hr>
+<h2 id="heading-24">安全、认证与加密</h2>
+<p>密钥管理、单点登录、WAF、加密与权限控制。</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">Stars</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hashicorp/vault</td>
+<td style="text-align:right">36K</td>
+<td>密钥管理与加密服务</td>
+</tr>
+<tr>
+<td>authelia/authelia</td>
+<td style="text-align:right">28K</td>
+<td>自托管 SSO 与多因素认证</td>
+</tr>
+<tr>
+<td>getsops/sops</td>
+<td style="text-align:right">22K</td>
+<td>加密配置文件管理</td>
+</tr>
+<tr>
+<td>FiloSottile/age</td>
+<td style="text-align:right">23K</td>
+<td>现代文件加密工具</td>
+</tr>
+<tr>
+<td>FiloSottile/mkcert</td>
+<td style="text-align:right">59K</td>
+<td>本地 HTTPS 开发证书</td>
+</tr>
+<tr>
+<td>apache/casbin</td>
+<td style="text-align:right">20K</td>
+<td>ACL/RBAC/ABAC 权限库</td>
+</tr>
+<tr>
+<td>chaitin/SafeLine</td>
+<td style="text-align:right">22K</td>
+<td>自托管 WAF 反向代理</td>
+</tr>
+<tr>
+<td>gravitational/teleport</td>
+<td style="text-align:right">20K</td>
+<td>基础设施安全访问</td>
+</tr>
+<tr>
+<td>bettercap/bettercap</td>
+<td style="text-align:right">19K</td>
+<td>网络侦察与中间人工具</td>
+</tr>
+<tr>
+<td>projectdiscovery/nuclei</td>
+<td style="text-align:right">29K</td>
+<td>YAML 驱动的漏洞扫描器</td>
+</tr>
+<tr>
+<td>TecharoHQ/anubis</td>
+<td style="text-align:right">20K</td>
+<td>拦截 AI 爬虫的 HTTP 中间件</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading-25">对比介绍</h3>
+<p>安全类像门锁、保险箱和门卫：Vault/SOPS/age 管秘密，Authelia 管登录入口，Casbin 管权限规则，SafeLine 管 Web 攻击，Teleport 管基础设施访问。</p>
+<p>Nuclei、bettercap 偏安全测试工具，能力强但别拿去乱扫，扫错地方容易从安全工程师变成法务聊天室常客。</p>
+<h3 id="heading-26">不同场景下的最优选择</h3>
+<ul>
+<li>密钥管理：Vault。</li>
+<li>加密配置文件：SOPS。</li>
+<li>简单文件加密：age。</li>
+<li>SSO/MFA：Authelia。</li>
+<li>权限模型：Casbin。</li>
+<li>WAF：SafeLine。</li>
+<li>漏洞扫描：Nuclei。</li>
+</ul>
+<hr>
+<h2 id="heading-27">文件同步、网盘与备份</h2>
+<p>云存储挂载、自托管网盘、备份与文件传输。</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">Stars</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>syncthing/syncthing</td>
+<td style="text-align:right">85K</td>
+<td>P2P 文件持续同步</td>
+</tr>
+<tr>
+<td>rclone/rclone</td>
+<td style="text-align:right">58K</td>
+<td>云存储 rsync 式同步</td>
+</tr>
+<tr>
+<td>restic/restic</td>
+<td style="text-align:right">34K</td>
+<td>加密增量备份</td>
+</tr>
+<tr>
+<td>filebrowser/filebrowser</td>
+<td style="text-align:right">35K</td>
+<td>Web 文件管理器</td>
+</tr>
+<tr>
+<td>AlistGo/alist</td>
+<td style="text-align:right">50K</td>
+<td>多存储聚合/WebDAV</td>
+</tr>
+<tr>
+<td>OpenListTeam/OpenList</td>
+<td style="text-align:right">23K</td>
+<td>AList 社区分支</td>
+</tr>
+<tr>
+<td>cloudreve/cloudreve</td>
+<td style="text-align:right">28K</td>
+<td>自托管文件管理与分享</td>
+</tr>
+<tr>
+<td>schollz/croc</td>
+<td style="text-align:right">35K</td>
+<td>端到端加密文件传输</td>
+</tr>
+<tr>
+<td>GopeedLab/gopeed</td>
+<td style="text-align:right">25K</td>
+<td>现代下载管理器</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading-28">对比介绍</h3>
+<p>这类解决的是文件去哪儿、怎么去、丢了怎么办。Syncthing 是点对点同步，rclone 是云盘搬运工，restic 是保险柜，Alist/OpenList/Cloudreve 是网盘门面。</p>
+<p>croc 负责临时传文件，Gopeed 负责下载，Filebrowser 负责让目录长出 Web UI。</p>
+<h3 id="heading-29">不同场景下的最优选择</h3>
+<ul>
+<li>多设备同步：Syncthing。</li>
+<li>云盘迁移/同步：rclone。</li>
+<li>备份：restic。</li>
+<li>多网盘聚合：Alist 或 OpenList。</li>
+<li>简单 Web 文件管理：Filebrowser。</li>
+<li>一次性安全传文件：croc。</li>
+</ul>
+<hr>
+<h2 id="heading-30">自托管应用与平台</h2>
+<p>Git 托管、笔记、通知、面板与个人云服务。</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">Stars</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>go-gitea/gitea</td>
+<td style="text-align:right">56K</td>
+<td>自托管 Git + CI/CD 一体化</td>
+</tr>
+<tr>
+<td>gogs/gogs</td>
+<td style="text-align:right">48K</td>
+<td>轻量自托管 Git 服务</td>
+</tr>
+<tr>
+<td>pocketbase/pocketbase</td>
+<td style="text-align:right">59K</td>
+<td>单文件实时后端（BaaS）</td>
+</tr>
+<tr>
+<td>usememos/memos</td>
+<td style="text-align:right">61K</td>
+<td>自托管 Markdown 笔记</td>
+</tr>
+<tr>
+<td>navidrome/navidrome</td>
+<td style="text-align:right">22K</td>
+<td>个人音乐流媒体服务</td>
+</tr>
+<tr>
+<td>knadh/listmonk</td>
+<td style="text-align:right">22K</td>
+<td>自托管邮件列表/Newsletter</td>
+</tr>
+<tr>
+<td>binwiederhier/ntfy</td>
+<td style="text-align:right">31K</td>
+<td>自托管推送通知</td>
+</tr>
+<tr>
+<td>1Panel-dev/1Panel</td>
+<td style="text-align:right">36K</td>
+<td>现代化 VPS 控制面板</td>
+</tr>
+<tr>
+<td>IceWhaleTech/CasaOS</td>
+<td style="text-align:right">34K</td>
+<td>个人云系统</td>
+</tr>
+<tr>
+<td>glanceapp/glance</td>
+<td style="text-align:right">35K</td>
+<td>自托管仪表盘</td>
+</tr>
+<tr>
+<td>AdguardTeam/AdGuardHome</td>
+<td style="text-align:right">35K</td>
+<td>全网络广告/DNS 过滤</td>
+</tr>
+<tr>
+<td>openfaas/faas</td>
+<td style="text-align:right">26K</td>
+<td>开源 Serverless 函数平台</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading-31">对比介绍</h3>
+<p>自托管区是数字独立宣言：Gitea/Gogs 管代码，PocketBase 管后端，Memos 管笔记，Navidrome 管音乐，1Panel/CasaOS 管服务器。</p>
+<p>这些项目的共同点是：你拥有数据，也拥有维护它们时半夜看日志的快乐。</p>
+<h3 id="heading-32">不同场景下的最优选择</h3>
+<ul>
+<li>自托管 Git：Gitea；极轻量可看 Gogs。</li>
+<li>小团队后端：PocketBase。</li>
+<li>个人笔记：Memos。</li>
+<li>个人音乐库：Navidrome。</li>
+<li>VPS 面板：1Panel。</li>
+<li>家庭云：CasaOS。</li>
+<li>推送通知：ntfy。</li>
+</ul>
+<hr>
+<h2 id="heading-33">爬虫、媒体与下载</h2>
+<p>网页抓取、流媒体、视频下载与实时通信。</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">Stars</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gocolly/colly</td>
+<td style="text-align:right">25K</td>
+<td>优雅爬虫框架</td>
+</tr>
+<tr>
+<td>iawia002/lux</td>
+<td style="text-align:right">31K</td>
+<td>视频下载 CLI</td>
+</tr>
+<tr>
+<td>putyy/res-downloader</td>
+<td style="text-align:right">18K</td>
+<td>多平台网络资源下载</td>
+</tr>
+<tr>
+<td>bluenviron/mediamtx</td>
+<td style="text-align:right">19K</td>
+<td>实时流媒体服务器/代理</td>
+</tr>
+<tr>
+<td>livekit/livekit</td>
+<td style="text-align:right">19K</td>
+<td>实时音视频通信栈</td>
+</tr>
+<tr>
+<td>m1k1o/neko</td>
+<td style="text-align:right">21K</td>
+<td>自托管 WebRTC 虚拟浏览器</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading-34">对比介绍</h3>
+<p>这里是内容搬运与实时媒体区：Colly 抓网页，Lux/Res-downloader 下载媒体，MediaMTX 管直播流，LiveKit 管实时音视频，Neko 则把浏览器关进 Docker 小房间。</p>
+<p>做爬虫要讲武德，做流媒体要讲带宽；两者都不讲，服务器会用风扇声提醒你做人。</p>
+<h3 id="heading-35">不同场景下的最优选择</h3>
+<ul>
+<li>网页爬虫：Colly。</li>
+<li>视频下载：Lux 或 res-downloader。</li>
+<li>RTSP/RTMP/WebRTC 媒体服务：MediaMTX。</li>
+<li>实时音视频应用：LiveKit。</li>
+<li>远程浏览器：Neko。</li>
+</ul>
+<hr>
+<h2 id="heading-36">通用工具库</h2>
+<p>日志、校验、集合操作、Excel 等日常开发库。</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">Stars</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sirupsen/logrus</td>
+<td style="text-align:right">26K</td>
+<td>结构化日志库</td>
+</tr>
+<tr>
+<td>uber-go/zap</td>
+<td style="text-align:right">25K</td>
+<td>高性能结构化日志</td>
+</tr>
+<tr>
+<td>samber/lo</td>
+<td style="text-align:right">21K</td>
+<td>Lodash 风格泛型工具库</td>
+</tr>
+<tr>
+<td>go-playground/validator</td>
+<td style="text-align:right">20K</td>
+<td>Struct 字段校验</td>
+</tr>
+<tr>
+<td>qax-os/excelize</td>
+<td style="text-align:right">21K</td>
+<td>Excel 读写库</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading-37">对比介绍</h3>
+<p>通用库是项目里的螺丝刀：logrus/zap 管日志，validator 管参数校验，lo 管集合操作，excelize 管 Excel。</p>
+<p>zap 更偏性能，logrus 更老牌；lo 能让泛型代码少写不少循环，但也别把简单 for 循环包装成俄罗斯套娃。</p>
+<h3 id="heading-38">不同场景下的最优选择</h3>
+<ul>
+<li>高性能日志：zap。</li>
+<li>传统结构化日志：logrus。</li>
+<li>参数校验：validator。</li>
+<li>集合/泛型工具：lo。</li>
+<li>Excel 读写：excelize。</li>
+</ul>
+<hr>
+<h2 id="go--1">Go 语言与学习资源</h2>
+<p>Go 官方仓库、教程、书籍、算法题解和生态索引，适合入门与进阶。</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">Stars</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>unknwon/the-way-to-go_ZH_CN</td>
+<td style="text-align:right">35K</td>
+<td>《Go 入门指南》中文译本</td>
+</tr>
+<tr>
+<td>astaxie/build-web-application-with-golang</td>
+<td style="text-align:right">44K</td>
+<td>如何用 Go 构建 Web 应用（电子书）</td>
+</tr>
+<tr>
+<td>halfrost/LeetCode-Go</td>
+<td style="text-align:right">34K</td>
+<td>LeetCode Go 题解</td>
+</tr>
+<tr>
+<td>tmrts/go-patterns</td>
+<td style="text-align:right">28K</td>
+<td>Go 设计模式与惯用法</td>
+</tr>
+<tr>
+<td>quii/learn-go-with-tests</td>
+<td style="text-align:right">24K</td>
+<td>测试驱动方式学习 Go</td>
+</tr>
+<tr>
+<td>chai2010/advanced-go-programming-book</td>
+<td style="text-align:right">20K</td>
+<td>《Go 语言高级编程》开源图书</td>
+</tr>
+<tr>
+<td>inancgumus/learngo</td>
+<td style="text-align:right">20K</td>
+<td>1000+ Go 示例与练习</td>
+</tr>
+<tr>
+<td>dariubs/GoBooks</td>
+<td style="text-align:right">19K</td>
+<td>Go 图书目录</td>
+</tr>
+<tr>
+<td>TheAlgorithms/Go</td>
+<td style="text-align:right">18K</td>
+<td>算法与数据结构 Go 实现</td>
+</tr>
+<tr>
+<td>yeasy/docker_practice</td>
+<td style="text-align:right">26K</td>
+<td>Docker 容器实践教程</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading-39">对比介绍</h3>
+<p>学习资源区像 Go 修炼地图：官方仓库是武林总纲，The Way to Go 适合入门，Learn Go with Tests 适合边打边学，Advanced Go Programming 适合进阶渡劫。</p>
+<p>算法、设计模式、Docker 实践这些属于旁支技能，学完不会立刻飞升，但排查问题时会显得很有底气。</p>
+<h3 id="heading-40">不同场景下的最优选择</h3>
+<ul>
+<li>零基础入门：The Way to Go 中文版。</li>
+<li>喜欢实践：Learn Go with Tests。</li>
+<li>刷题：LeetCode-Go。</li>
+<li>进阶底层与工程：Advanced Go Programming。</li>
+<li>查生态：awesome-go。</li>
+<li>学容器：docker_practice。</li>
+</ul>
+<hr>
+<h2 id="heading-41">其他</h2>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">Stars</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>wailsapp/wails</td>
+<td style="text-align:right">35K</td>
+<td>Go + Web 技术构建桌面应用</td>
+</tr>
+<tr>
+<td>fyne-io/fyne</td>
+<td style="text-align:right">28K</td>
+<td>跨平台原生 GUI 工具包</td>
+</tr>
+<tr>
+<td>ethereum/go-ethereum</td>
+<td style="text-align:right">51K</td>
+<td>以太坊官方 Go 实现</td>
+</tr>
+<tr>
+<td>hashicorp/terraform</td>
+<td style="text-align:right">49K</td>
+<td>基础设施即代码，声明式配置</td>
+</tr>
+<tr>
+<td>opentofu/opentofu</td>
+<td style="text-align:right">29K</td>
+<td>Terraform 开源分支</td>
+</tr>
+<tr>
+<td>pulumi/pulumi</td>
+<td style="text-align:right">25K</td>
+<td>多语言 IaC 平台</td>
+</tr>
+<tr>
+<td>stretchr/testify</td>
+<td style="text-align:right">26K</td>
+<td>断言与 Mock 测试工具包</td>
+</tr>
+<tr>
+<td>microsoft/typescript-go</td>
+<td style="text-align:right">26K</td>
+<td>TypeScript 原生 Go 移植（实验）</td>
+</tr>
+<tr>
+<td>pranshuparmar/witr</td>
+<td style="text-align:right">18K</td>
+<td>（项目简介待补充）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="heading-42">对比介绍</h3>
+<p>Wails/Fyne 做桌面，go-ethereum 做区块链，Terraform/OpenTofu/Pulumi 做 IaC，Testify 做测试，typescript-go 做语言实验。</p>
+<p>它们像工具房里不同抽屉：拿错了也能用，但场面会很抽象，比如用区块链项目写桌面按钮。</p>
+<h3 id="heading-43">不同场景下的最优选择</h3>
+<ul>
+<li>Go + Web 桌面：Wails。</li>
+<li>原生 GUI：Fyne。</li>
+<li>以太坊节点/协议：go-ethereum。</li>
+<li>基础设施即代码：Terraform 或 OpenTofu；多语言 IaC 选 Pulumi。</li>
+<li>Go 测试断言：Testify。</li>
+</ul>
+<hr>

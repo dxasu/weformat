@@ -10,7 +10,7 @@ go run . [参数]
 
 常用参数：
 
-- `-i <file>`：从 Markdown 文件读取内容。
+- `<file>` 或 `-i <file>`：从 Markdown 文件读取内容。
 - `--std`：没有 `-i` 时从标准输入读取；不打开浏览器时输出到标准输出。
 - `-t <theme>`：指定主题，例如 `bauhaus`、`wechat-native`。
 - `-w`：生成 `preview.html`，并按配置决定是否自动打开浏览器。
@@ -22,13 +22,14 @@ go run . [参数]
 
 ## 输入规则
 
-有 `-i` 时，输入来自指定 Markdown 文件：
+传入文件路径时，输入来自指定 Markdown 文件，`-i` 可以省略：
 
 ```powershell
+go run . article.md -t bauhaus
 go run . -i article.md -t bauhaus
 ```
 
-没有 `-i` 时，默认从剪贴板读取 Markdown：
+没有文件路径和 `-i` 时，默认从剪贴板读取 Markdown：
 
 ```powershell
 go run . -t bauhaus
